@@ -9,6 +9,10 @@ export interface IAction {
     type: JobActions;
     payload: IJob;
 }
+export interface IDispatch {
+    (action: IAction): void;
+}
+
 
 export type IReducer = Reducer<IJob[], IAction>;
 

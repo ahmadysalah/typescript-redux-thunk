@@ -5,21 +5,22 @@ import { jobFormData } from '../utils/formData'
 import jobFormValidation from '../utils/jobFormValidation';
 import { useDispatch } from 'react-redux';
 
-import { IJob } from '../redux/constants';
+import { IJob, IDispatch, JobActions } from '../redux/constants';
 
 interface FormProps {
 
 }
 
 const FormPage: React.FC<FormProps> = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<IDispatch>();
     const initialValues: IJob = {} as IJob;
 
     const formik = useFormik({
         initialValues,
         validationSchema: jobFormValidation,
         onSubmit: values => {
-            console.log({ values })
+            console.log(values);
+            dispatch({ type: JobActions.ADD_JOB, payload: values });
         }
     })
     const formRef = React.useRef<HTMLFormElement>(null)
